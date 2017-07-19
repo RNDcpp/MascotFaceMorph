@@ -1,0 +1,118 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>かお</title>
+	<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="js/face_sets.js"></script>
+	<script type="text/javascript">set_mode=true;</script>
+	<%if session[:face_palams]%>
+		<script type="text/javascript">
+		function preload(){
+			ang = <%=h session[:face_palams][:ang]%>;
+    		sad = <%=h session[:face_palams][:sad]%>;
+    		pre = <%=h session[:face_palams][:pre]%>;
+    		cool = <%=h session[:face_palams][:cool]%>;
+    		cute = <%=h session[:face_palams][:cute]%>;
+    		funny = <%=h session[:face_palams][:funny]%>;
+    		edit_p = <%=h session[:face_palams][:edit1]%>;
+    		edit2_p = <%=h session[:face_palams][:edit2]%>;
+    		edit_set = <%=session[:face_palams][:edit_set1]%>;
+    		edit_set2 = <%=session[:face_palams][:edit_set2]%>;
+    	}
+    	</script>
+	<%else%>
+		<script type="text/javascript">
+		function preload(){
+			ang = 0;
+    		sad = 0;
+    		pre = 0;
+    		cool = 0;
+    		cute = 0;
+    		funny = 0;
+    		edit_p = 0;
+    		edit2_p = 0;
+    	}
+    	</script>
+    <%end%>
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+	<div class="header">マスコットかおもーふ：アセットえでぃた</div>
+	<div class="morph-column">
+		<div class="morph-container morph-container-set">	
+			<div class="right-container">
+				<canvas id="main_canvas" width='500px' height='500px' style="top:0px; width:100%; height:auto; margin:0 auto; background-color:white; border:solid;border-color:#888">>
+				</canvas>
+				<div class="share-panel">
+					<p>
+						アセットの名前
+						<input id="asset-name"　type = "text-field" value="noname">
+						<button id="asset-submit" class="cbtn">アセットを登録</button>
+						<span id="response"></span>
+					</p>
+				</div>
+			</div>
+			<div class="left-container set-panel">
+				<div id="volume-panel" class = "vpanel">
+					<div style="display:inline-block;width:120px;text-align:center;margin:0 auto;">
+						輪郭A<div id="IS" class = "sbar-set"></div>
+						輪郭B<div id="JS" class = "sbar-set"></div>
+						輪郭C<div id="yS" class = "sbar-set"></div>
+						鼻の位置<div id="nose_yS" class = "sbar-set"></div>
+						鼻の高さ<div id="nose_lenS" class = "sbar-set"></div>
+					</div>
+					<div style="display:inline-block;width:120px;text-align:center;margin:0 auto;">
+						目の間隔<div id="eye_hS" class = "sbar-set"></div>
+						目の高さ<div id="eye_vS" class = "sbar-set"></div>
+						目の形A<div id="eye_IS" class = "sbar-set"></div>
+						目の形B<div id="eye_JS" class = "sbar-set"></div>
+						目の輪郭の太さ<div id="eye_line_widthS" class = "sbar-set"></div>
+						目の大きさ<div id="eye_vsizeS" class = "sbar-set"></div>
+						目の幅<div id="eye_widthS" class = "sbar-set"></div>
+					</div>
+					<div style="display:inline-block;width:120px;text-align:center;margin:0 auto;">
+						黒目の輪郭<div id="eye_pup_widthS" class = "sbar-set"></div>
+						黒目の位置<div id="eye_pup_oS" class = "sbar-set"></div>
+						黒目の横幅<div id="eye_sizeS" class = "sbar-set"></div>
+						黒目の縦幅<div id="eye_pup_sizeS" class = "sbar-set"></div>
+					</div>
+					<div style="display:inline-block;width:120px;text-align:center;margin:0 auto;">
+						口の位置<div id="mouth_yS" class = "sbar-set"></div>
+						口の大きさ<div id="mouth_widthS" class = "sbar-set"></div>
+						口角の高さ<div id="mouth_end_yS" class = "sbar-set"></div>
+						口の形A<div id="mouth_t_iS" class = "sbar-set"></div>
+						口の形B<div id="mouth_t_jS" class = "sbar-set"></div>
+						口の形C<div id="mouth_b_iS" class = "sbar-set"></div>
+						口の形D<div id="mouth_b_jS" class = "sbar-set"></div>
+					</div>
+					<div style="display:inline-block;width:120px;text-align:center;margin:0 auto;">
+						眉の高さ<div id="eb_yS" class = "sbar-set"></div>
+						眉の間隔<div id="eb_hS" class = "sbar-set"></div>
+						眉の形A<div id="eb_iS" class = "sbar-set"></div>
+						眉の形B<div id="eb_jS" class = "sbar-set"></div>
+						眉の幅<div id="eb_wS" class = "sbar-set"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="column">
+		<div class>
+			<h1>アセットエディタについて</h1>
+			<p>
+				アセットエディタでは<a href="/">かおもーふ</a>で利用出来るアセットを作成することができます。
+			</p>
+			<p>
+				名前を入力して，[アセットを登録]のボタンを押すとアセットが名前付きで登録されます。
+			</p>
+			<p>
+				<a href="/">かおもーふに戻る</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

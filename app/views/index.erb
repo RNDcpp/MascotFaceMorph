@@ -1,0 +1,216 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>マスコットかおもーふ</title>
+	<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/face_sets.js"></script>
+	<%if session[:face_palams]%>
+		<script type="text/javascript">
+		function preload(){
+			ang = <%=h session[:face_palams][:ang]%>;
+    		sad = <%=h session[:face_palams][:sad]%>;
+    		pre = <%=h session[:face_palams][:pre]%>;
+    		cool = <%=h session[:face_palams][:cool]%>;
+    		cute = <%=h session[:face_palams][:cute]%>;
+    		funny = <%=h session[:face_palams][:funny]%>;
+    		edit_p = <%=h session[:face_palams][:edit1]%>;
+    		edit2_p = <%=h session[:face_palams][:edit2]%>;
+    		edit_set = <%=session[:face_palams][:edit_set1]%>;
+    		edit_set2 = <%=session[:face_palams][:edit_set2]%>;
+    	}
+    	</script>
+	<%else%>
+		<script type="text/javascript">
+		function preload(){
+			ang = 0;
+    		sad = 0;
+    		pre = 0;
+    		cool = 0;
+    		cute = 0;
+    		funny = 0;
+    		edit_p = 0;
+    		edit2_p = 0;
+    	}
+    	</script>
+    <%end%>
+	<script type="text/javascript" src="js/main.js"></script>
+	<link rel="canonical" href="https://dev.twitter.com/web/tweet-button">
+</head>
+<body>
+	<div class="header">マスコットかおもーふ</div>
+	<div class="morph-column">
+		<div class="morph-container">	
+			<div class="right-container">
+					<canvas id="main_canvas" width='500px' height='500px' style="top:0px; width:100%; height:auto; margin:0 auto; background-color:white; border:solid;border-color:#888">>
+					</canvas>
+					<div class="share-panel">
+						 <button type="button" onClick="setPRNM();">プロ生ちゃん</button>
+						 <button type="button" onClick="setZNK();">ずん子</button>
+						 <button type="button" onClick="setSNGU();">ハッカドール3号</button>
+						<%unless current_user %>
+							<button id="sign_in_twitter">Twitterでログインしてツイート</button>
+						<%else%>
+							<form id="tweet-form" action="/tweet_update" method="post">
+								<input name="authenticity_token" type="hidden" value="<%=session[:csrf]%>" />
+								<p>
+									画像と一緒にツイート
+									<textarea name="text" rows="4" cols="40">http://msct.rndlog.net ＃マスコットかおもーふ</textarea>
+								</p>
+								<input id="data-tweet" type="button" value="Tweet">
+							</form>
+						<%end%>
+					</div>
+			</div>
+			<div class="left-container">
+				<div id="volume-panel" class = "vpanel">
+					<div class="emotion-volume">
+					<div class="name">Emotion</div>
+					怒ってる<div id="angS" class = "sbar"></div>
+					泣いてる<div id="sadS" class = "sbar"></div>
+					笑ってる<div id="preS" class = "sbar"></div>
+					</div>
+					<div class="atmosphere-volume">
+					<div class="name">Atmosphere</div>
+					凛々しい<div id="coolS" class = "sbar"></div>
+					かわいい<div id="cuteS" class = "sbar"></div>
+					おもしろい<div id="funnyS" class = "sbar"></div>
+					</div>
+					アセット1<button id="asset-choice-btn1" class = "cbtn">選択</button>
+					<div id="editS" class = "sbar"></div>
+					アセット2<button id="asset-choice-btn2" class = "cbtn">選択</button>
+					<div id="edit2S" class = "sbar"></div>
+				</div>
+				<div id="face-asset-choice" class = "vpanel">
+					<div class="choice-panel">
+						<%if @f_assets%>
+							<%@f_assets.each do |ast|%>
+							<div class="asset-prof" >
+								<img  class="asset-sumb" src="/img/asset/<%=ast.id%>.png" 
+								onclick="
+								edit_set = {
+								    i: <%=h ast.i.to_f*0.000001%>,
+								    j: <%=h ast.j*0.000001%>,
+								    y: <%=h ast.y*0.000001%>,
+								    eye_i: <%=h ast.eye_i*0.000001%>,
+								    eye_j: <%=h ast.eye_j*0.000001%>,
+								    eye_h: <%=h ast.eye_h*0.000001%>,
+								    eye_v: <%=h ast.eye_v*0.000001%>,
+								    eye_vsize: <%=h ast.eye_vsize*0.000001%>,
+								    eye_width: <%=h ast.eye_width*0.000001%>,
+								    eye_size: <%=h ast.eye_size*0.000001%>,
+								    nose_y: <%=h ast.nose_y*0.000001%>,
+								    nose_len: <%=h ast.nose_len*0.000001%>,
+								    mouth_y: <%=h ast.mouth_y*0.000001%>,
+								    mouth_width: <%=h ast.mouth_width*0.000001%>,
+								    mouth_end_y: <%=h ast.mouth_end_y*0.000001%>,
+								    mouth_t_i: <%=h ast.mouth_t_i*0.000001%>,
+								    mouth_t_j: <%=h ast.mouth_t_j*0.000001%>,
+								    mouth_b_i: <%=h ast.mouth_b_i*0.000001%>,
+								    mouth_b_j: <%=h ast.mouth_b_j*0.000001%>,
+								    eb_i: <%=h ast.eb_i*0.000001%>,
+								    eb_j: <%=h ast.eb_j*0.000001%>,
+								    eb_y: <%=h ast.eb_y*0.000001%>,
+								    eb_h: <%=h ast.eb_h*0.000001%>,
+								    eb_w: <%=h ast.eb_w*0.000001%>,
+								    eye_pup_width: <%=h ast.eye_pup_width*0.000001%>,
+								    eye_line_width: <%=h ast.eye_line_width*0.000001%>,
+								    eye_pup_size: <%=h ast.eye_pup_size*0.000001%>,
+								    eye_pup_o: <%=h ast.eye_pup_o*0.000001%>
+								  };
+								  set_face();
+		 						  replotCurve();
+								  asset_choice_close();
+								  "
+								  >
+								  <p><%=h ast.name%></p>
+							</div>
+							<%end%>
+						<%end%>
+						<button id="asset-choice-btn-close" class="cbtn">close</button>
+					</div>
+				</div>
+				<div id="face-asset-choice2" class = "vpanel">
+					<div class="choice-panel">
+						<%if @f_assets%>
+							<%@f_assets.each do |ast|%>
+								<img  class="asset-sumb" src="/img/asset/<%=ast.id%>.png" 
+								onclick="
+								edit_set2 = {
+								    i: <%=h ast.i.to_f*0.000001%>,
+								    j: <%=h ast.j*0.000001%>,
+								    y: <%=h ast.y*0.000001%>,
+								    eye_i: <%=h ast.eye_i*0.000001%>,
+								    eye_j: <%=h ast.eye_j*0.000001%>,
+								    eye_h: <%=h ast.eye_h*0.000001%>,
+								    eye_v: <%=h ast.eye_v*0.000001%>,
+								    eye_vsize: <%=h ast.eye_vsize*0.000001%>,
+								    eye_width: <%=h ast.eye_width*0.000001%>,
+								    eye_size: <%=h ast.eye_size*0.000001%>,
+								    nose_y: <%=h ast.nose_y*0.000001%>,
+								    nose_len: <%=h ast.nose_len*0.000001%>,
+								    mouth_y: <%=h ast.mouth_y*0.000001%>,
+								    mouth_width: <%=h ast.mouth_width*0.000001%>,
+								    mouth_end_y: <%=h ast.mouth_end_y*0.000001%>,
+								    mouth_t_i: <%=h ast.mouth_t_i*0.000001%>,
+								    mouth_t_j: <%=h ast.mouth_t_j*0.000001%>,
+								    mouth_b_i: <%=h ast.mouth_b_i*0.000001%>,
+								    mouth_b_j: <%=h ast.mouth_b_j*0.000001%>,
+								    eb_i: <%=h ast.eb_i*0.000001%>,
+								    eb_j: <%=h ast.eb_j*0.000001%>,
+								    eb_y: <%=h ast.eb_y*0.000001%>,
+								    eb_h: <%=h ast.eb_h*0.000001%>,
+								    eb_w: <%=h ast.eb_w*0.000001%>,
+								    eye_pup_width: <%=h ast.eye_pup_width*0.000001%>,
+								    eye_line_width: <%=h ast.eye_line_width*0.000001%>,
+								    eye_pup_size: <%=h ast.eye_pup_size*0.000001%>,
+								    eye_pup_o: <%=h ast.eye_pup_o*0.000001%>
+								  };
+								  set_face();
+		 						  replotCurve();
+								  asset_choice_close2();
+								  "
+								  >
+								  <p><%=h ast.name%></p>
+							<%end%>
+						<%end%>
+						<button id="asset-choice-btn-close2" class="cbtn">close</button>
+					</div>
+				</div>
+			</div>		
+		</div>
+	</div>
+	<div class="column">
+		<div class>
+			<h1>マスコットかおもーふについて</h1>
+			<h2>
+				マスコットかおもーふの遊び方
+			</h2>
+			<p>
+				マスコットかおもーふはマスコットの顔を
+				<p>
+				<h3>感情</h3>
+				<p class="red">怒っている顔</p>
+				<p class="blue">泣いている顔</p>
+				<p class="yellow">笑っている顔</p>
+				</p>
+				<p>
+				<h3>雰囲気</h3>
+				<p class="blue">凛々しい顔</p>
+				<p class="red">かわいい顔</p>
+				<p class="yellow">おもしろい顔</p>
+				</p>
+				のパラメータで操作することができるアプリです
+			</p>
+			<p>
+				ほかの人が作った顔のデータ（アセット）を用いて顔を変形させることもできます。
+			</p>
+			<p>
+				アセットの作成はこちらから:<a href="/set">アセットえでぃた</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

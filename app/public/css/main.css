@@ -1,0 +1,139 @@
+html{
+	background-repeat: repeat;
+}
+body{
+	background-image: url("../img/background.png");
+	width: 100%;
+	margin: 0;
+}
+.right-container{
+	width: 450px;
+	padding: 3px;
+	vertical-align: top;
+	display: inline-block;
+}
+.left-container{
+	text-align: center;
+	padding: 15px;
+	width: 450px;
+	display: inline-block;
+}
+.vpanel{
+	display:inline-block;width:100%;
+	padding: 0px 10px;
+	text-align:center;
+	margin-top:-20px;
+	background-color:rgba(200,234,200,0.8);
+	color:#004400;
+	font-size:1.2em;
+	border-left:rgba(255,255,255,0.2);
+	border-top:rgba(255,255,255,0.3);
+	border-right:rgba(0,0,0,0.3);
+	border-bottom:rgba(0,0,0,0.4);
+	border-width:4px;
+	border-style:solid;
+	overflow: scroll;
+}
+.set-panel{
+	width: 650px;
+}
+#response{
+	font-size: 0.8em;
+}
+.header{
+	text-align: center;
+	font-size: 40px;
+	color: #fff;
+	background-color: rgba(0,200,150,0.8);
+	border-top: solid;
+	border-top-width: 8px;
+	border-top-color: #8fc;
+	border-bottom: solid;
+	border-bottom-width: 8px;
+	border-bottom-color: #8fc;
+	padding: 20px 0px;
+	margin: 10px 0px;
+}
+.sbar{
+	margin:5px 10px;
+	height: 14px;
+}
+.sbar-set{
+	margin:16px 15px;
+	height: 14px;
+}
+.asset-sumb{
+	width: 80px;
+	height: 80px;
+	background-color: white;
+}
+.share-panel{
+	background-color:rgba(200,234,200,0.8);
+	margin: 10px 0px;
+	color:#004400;
+	font-size:1.2em;
+	border-left:rgba(255,255,255,0.2);
+	border-top:rgba(255,255,255,0.3);
+	border-right:rgba(0,0,0,0.3);
+	border-bottom:rgba(0,0,0,0.4);
+	border-width:4px;
+	border-style:solid;
+}
+.share-panel>form{
+	width: 350px;
+}
+.morph-container{
+	margin:0 auto;
+	width:1000px;
+	padding-top:30px;
+	padding: 30px;
+}
+.morph-container-set{
+	width: 1200px;
+}
+.morph-column{
+	background-color:rgba(0,51,0,0.8);
+}
+.column{
+	background-color: rgba(255,255,255,0.7);
+	text-align: center;
+}
+.emotion-volume{
+	margin: 0 0;
+	padding: 10px;
+	background-color: rgba(200,0,0,0.3);
+}
+.atmosphere-volume{
+	margin: 0 0;
+	padding: 10px;
+	background-color: rgba(0,0,200,0.3);
+}
+.name{
+	margin: 0;
+	padding: 0;
+	font-style: bold;
+	font-size: 1.2em;
+}
+.cbtn{
+	color: #fff;
+	background-color: #55b;
+	padding: 5px;
+	font-size:0.8em;
+	border-radius: 10px;
+}
+.red{
+	color: #944;
+	font-size:1.6em;
+}
+.blue{
+	color: #449;
+	font-size:1.6em;
+}
+.yellow{
+	color: #994;
+	font-size:1.6em;
+}
+.asset-prof{
+	width: 100px;
+	display: inline-block;
+}
